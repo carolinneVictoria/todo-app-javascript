@@ -1,28 +1,54 @@
-let listElement = document.querySelector("ul");
+let listElement = document.querySelector("#app ul");
 let inputElement = document.querySelector("#app input");
 let buttonElement = document.querySelector("#app button");
 
 let tarefas = JSON.parse(localStorage.getItem("@listaTarefas")) || [];
 
+tarefas = tarefas.map((tarefa) => {
+    if (typeof tarefa === "string") {
+        return {
+            texto: tarefa,
+            concluida: false
+        };
+    }
+    return tarefa;
+});
+
 function renderTarefas(){
     listElement.innerHTML = "";
 
-    tarefas.map((todo)=>{
+    tarefas.map((todo, index) => {
         let liElement = document.createElement("li");
-        let tarefaText = document.createTextNode(todo);
+
+        let checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = todo.concluida;
+
+        checkbox.onchange = function() {
+            tarefas[index].concluida = !tarefas[index].concluida;
+            renderTarefas();
+            salvarDados();
+        };
+
+        let span = document.createElement("span");
+        span.innerText = todo.texto;
+
+        if(todo.concluida){
+            span.classList.add("concluida");
+        }
 
         let linkElement = document.createElement("a");
-        linkElement.setAttribute("href", "#");
+        linkElement.href = "#";
+        linkElement.innerText = "🗑";
 
-        let linkText = document.createTextNode("Excluir");
-        linkElement.appendChild(linkText);
+        linkElement.onclick = function(){
+            deletarTarefa(index);
+        };
 
-        let posicao = tarefas.indexOf(todo);
-
-        linkElement.setAttribute("onclick", `deletarTarefa(${posicao})`)
-
-        liElement.appendChild(tarefaText);
+        liElement.appendChild(checkbox);
+        liElement.appendChild(span);
         liElement.appendChild(linkElement);
+
         listElement.appendChild(liElement);
     });
 }
@@ -35,7 +61,9 @@ function adicionarTarefas(){
         return false;
     } else {
         let novaTarefa = inputElement.value;
-        tarefas.push(novaTarefa);
+        tarefas.push({
+            texto: novaTarefa,
+            concluida: false });
         inputElement.value = '';
 
         renderTarefas();
