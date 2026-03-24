@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background-image: url(img/purpleSky.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#app{
+    background-color: #e9d3f9;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 16px;
+    width: 350px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #1e293b;
+    text-align: center;
+}
+
+.campoNovo{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.campoNovo input{
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.campoNovo input:focus{
+    border-color: #3b82f6;
+}
+
+.button{
+    background-color: #c880cd;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.button:hover{
+    background-color: #661065;
+}
+
+#tarefas{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#tarefas li{
+    background-color: #f9fafb;
+    padding: 10px 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s;
+    gap: 10px
+}
+
+#tarefas li:hover{
+    background-color: #f1f5f9;
+}
+
+#tarefas a{
+    color: #ef4444;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+#tarefas a:hover{
+    text-decoration: underline;
+}
+
+.concluida{
+    text-decoration: line-through;
+    color: #9ca3af;
+    transition: 0.2s;
+}
+
+@keyframes aparecer {
+    from{
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nova {
+    animation: aparecer 0.3s ease;
+}
+
+input[type="checkbox"] {
+    accent-color: #a222be;
+    cursor: pointer;
+}
